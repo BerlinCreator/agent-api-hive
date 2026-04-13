@@ -1,0 +1,370 @@
+# Agent API Hive
+
+> 76 APIs. 191 endpoints. One API key. Built for AI agents.
+
+Agent API Hive is a unified API suite that gives AI agents access to 76 production-ready APIs through a single API key. No juggling multiple subscriptions. No inconsistent auth patterns. One key, one base URL, one subscription.
+
+## Base URL
+
+https://agent-utility-belt-production.up.railway.app
+
+## Authentication
+
+Send your API key in the x-api-key header on every request:
+
+x-api-key: YOUR_API_KEY
+
+Get a free key at https://agentapihive.com/dashboard
+
+## Rate Limits
+
+| Tier | Price | Daily Limit |
+|------|-------|------------|
+| Free | $0 | 100/day |
+| Starter | $12/mo | 1,000/day |
+| Plus | $36/mo | 5,000/day |
+| Pro | $60/mo | 10,000/day |
+| Enterprise | Contact Us | Unlimited |
+
+## Error Codes
+
+| Code | HTTP | Meaning |
+|------|------|--------|
+| AUTH_ERROR | 401 | Missing or invalid API key |
+| VALIDATION_ERROR | 400 | Request body failed schema validation |
+| RATE_LIMIT_EXCEEDED | 429 | Daily quota exhausted, retry at reset time |
+| INTERNAL_ERROR | 500 | Unexpected server error, retry later |
+
+## Response Format
+
+All endpoints return JSON:
+
+```json
+{"success": true, "data": { ... }}
+{"success": false, "error": {"code": "ERROR_CODE", "message": "Human-readable explanation"}}
+```### Commodity
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/image/resize | Resize an uploaded image and return the transformed file. |
+| POST | /v1/image/compress | Compress an uploaded image and return the smaller file. |
+| POST | /v1/image/convert | Convert an uploaded image into another format. |
+| POST | /v1/image/watermark | Apply a text watermark to an uploaded image. |
+| POST | /v1/image/metadata | Inspect an uploaded image and return metadata as JSON. |
+| POST | /v1/pdf/merge | Merge multiple PDF URLs into one document. |
+| POST | /v1/pdf/split | Split a PDF by page selection. |
+| POST | /v1/pdf/info | Return metadata for a PDF file. |
+| POST | /v1/pdf/extract-text | Extract text content from a PDF. |
+| POST | /v1/qr/generate | Generate a QR code image from input data. |
+| POST | /v1/qr/barcode | Generate a barcode image from data. |
+| POST | /v1/qr/decode | Decode a QR code from an uploaded image. |
+| POST | /v1/email/validate | Validate one email address. |
+| POST | /v1/email/validate/bulk | Validate a batch of email addresses. |
+| POST | /v1/url/shorten | Create a short redirect link. |
+| GET | /v1/url/stats/{code} | Get analytics for a short URL. |
+| DELETE | /v1/url/{code} | Delete a short URL. |
+
+### Intelligence
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/currency/convert | Convert one amount between currencies. |
+| GET | /v1/currency/rates | List exchange rates for a base currency. |
+| GET | /v1/currency/supported | List supported currencies. |
+| POST | /v1/ip/lookup | Resolve geolocation and network details for an IP address. |
+| GET | /v1/ip/me | Return geo data for the caller IP. |
+| POST | /v1/ip/bulk | Resolve a batch of IP addresses. |
+| POST | /v1/string/encode | Encode a string using a supported encoding. |
+| POST | /v1/string/decode | Decode a previously encoded string. |
+| POST | /v1/string/hash | Hash an input string. |
+| POST | /v1/string/slugify | Turn freeform text into a URL-safe slug. |
+| POST | /v1/string/truncate | Shorten text to a fixed length. |
+| POST | /v1/string/generate | Generate a random string from a preset character set. |
+| POST | /v1/string/case | Convert text between common casing styles. |
+| POST | /v1/translate/ | Translate text into a target language. |
+| POST | /v1/translate/detect | Detect the language of a text sample. |
+| GET | /v1/translate/languages | List translation languages supported by the backend. |
+| POST | /v1/extract/extract | Extract structured fields from a web page. |
+
+### Enrichment
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/enrich/email | Enrich an email address with profile and company context. |
+| POST | /v1/enrich/domain | Enrich a company domain with business context. |
+| POST | /v1/serp/search | Run a search query against a supported engine. |
+| POST | /v1/monitor/check | Check website uptime and latency. |
+| POST | /v1/price/lookup | Look up pricing for a product or listing. |
+| POST | /v1/reviews/fetch | Fetch review summary data for a product URL. |
+| POST | /v1/rate-oracle/check | Get rate limiting guidance for a third-party service. |
+
+### Social
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/social/twitter/profile | Fetch a Twitter/X profile snapshot by username. |
+| POST | /v1/social/reddit/subreddit | Fetch recent subreddit posts with sorting and limits. |
+| POST | /v1/social/youtube/channel | Fetch channel-level stats and recent video data from YouTube. |
+
+### Advanced
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/patents/search | Search patent records by query. |
+| POST | /v1/papers/search | Search academic papers by topic. |
+| POST | /v1/company/lookup | Look up company data by name or domain. |
+| POST | /v1/product/extract | Extract structured product data from a URL. |
+| POST | /v1/sentiment/analyze | Analyze sentiment for a text sample. |
+| POST | /v1/resume/parse | Parse a resume from text or URL. |
+| POST | /v1/docgen/generate | Generate PDF or DOCX documents from templates and data. |
+| POST | /v1/handoff/create | Transfer tasks between agents with full context. |
+| POST | /v1/escalation/create | Route tasks through escalation levels with deadlines. |
+| POST | /v1/dispute/create | Manage disputes through a state machine lifecycle. |
+| POST | /v1/verify/email | Validate email, phone, and address formats. |
+| POST | /v1/entity/extract | Extract named entities from text. |
+| POST | /v1/watermark/image | Add text watermarks to images. |
+| POST | /v1/attest/sign | Cryptographic signing and verification using HMAC-SHA256. |
+
+### Utility
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/salary/lookup | Look up salary benchmarks for a role and market. |
+| POST | /v1/tax/lookup | Look up tax information for a jurisdiction. |
+| POST | /v1/ocr/extract | Extract text from an uploaded file using OCR. |
+| POST | /v1/calendar/check | Check availability for a requested window in a timezone. |
+| POST | /v1/code/execute | Run a JavaScript or Python snippet. |
+| POST | /v1/mock/create | Create a mock endpoint that serves fixed data. |
+| GET | /v1/mock/mocks | List existing mock endpoints. |
+| GET | /v1/mock/serve/{id} | Serve the configured payload for a mock endpoint. |
+
+### Agent Kernel
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/heartbeat/register | Register an agent heartbeat with interval and metadata. |
+| GET | /v1/heartbeat/status/{id} | Get agent heartbeat status by ID. |
+| GET | /v1/heartbeat/check/{id} | Check if agent is alive based on heartbeat. |
+| POST | /v1/audit/log | Log an audit event with action, actor, and metadata. |
+| GET | /v1/audit/logs | List audit logs with pagination and filtering. |
+| POST | /v1/lock/acquire | Acquire a distributed lock on a resource with TTL. |
+| POST | /v1/lock/release | Release a distributed lock by resource key. |
+| GET | /v1/lock/status/{resource} | Check lock status for a resource. |
+| POST | /v1/gate/flag | Create a feature flag with conditions and rollout percentage. |
+| GET | /v1/gate/evaluate/{flagId} | Evaluate a feature flag for a given context. |
+| PUT | /v1/gate/flag/{flagId} | Update a feature flag's conditions or rollout. |
+| DELETE | /v1/gate/flag/{flagId} | Delete a feature flag. |
+| POST | /v1/quota/check | Check remaining quota for a key. |
+| POST | /v1/quota/consume | Consume quota units for a key. |
+| GET | /v1/quota/status/{key} | Get quota status and usage for a key. |
+| POST | /v1/checkpoint/save | Save agent state checkpoint with metadata. |
+| GET | /v1/checkpoint/latest/{agentId} | Get latest checkpoint for an agent. |
+| GET | /v1/checkpoint/list/{agentId} | List all checkpoints for an agent. |
+| GET | /v1/checkpoint/{checkpointId} | Get a specific checkpoint by ID. |
+| POST | /v1/store/kv | Set a key-value pair with optional TTL. |
+| GET | /v1/store/kv/{key} | Get a value by key. |
+| DELETE | /v1/store/kv/{key} | Delete a key-value pair. |
+| GET | /v1/store/kv/list | List all keys with optional prefix filter. |
+| POST | /v1/store/blob | Upload binary data with metadata. |
+| GET | /v1/store/blob/{id} | Download binary data by ID. |
+| DELETE | /v1/store/blob/{id} | Delete binary data by ID. |
+| POST | /v1/secret/create | Create an encrypted secret with rotation schedule. |
+| GET | /v1/secret/{id} | Retrieve a secret by ID (masked unless masked=false). |
+| DELETE | /v1/secret/{id} | Delete a secret permanently. |
+| POST | /v1/secret/rotate/{id} | Rotate a secret with a new value. |
+| POST | /v1/queue/enqueue | Add a job to a named queue with optional priority and delay. |
+| POST | /v1/queue/dequeue | Dequeue jobs from a named queue. |
+| GET | /v1/queue/peek/{queue} | Peek at pending jobs without removing them. |
+| GET | /v1/queue/size/{queue} | Get queue depth (pending job count). |
+| POST | /v1/queue/ack/{jobId} | Acknowledge a completed job. |
+| POST | /v1/queue/retry/{jobId} | Retry a failed job. |
+| POST | /v1/policy/policy | Create an access/allow/block policy with rules. |
+| POST | /v1/policy/evaluate | Evaluate a request against policies. |
+| GET | /v1/policy/policy/{id} | Get a policy by ID. |
+| PUT | /v1/policy/policy/{id} | Update a policy's rules. |
+| DELETE | /v1/policy/policy/{id} | Delete a policy. |
+| POST | /v1/webhook/register | Register a webhook endpoint with events and secret. |
+| POST | /v1/webhook/deliver | Deliver a webhook event to a registered endpoint. |
+| GET | /v1/webhook/logs/{webhookId} | Get delivery logs for a webhook. |
+| DELETE | /v1/webhook/{webhookId} | Delete a webhook registration. |
+| POST | /v1/schedule/create | Create a scheduled task with cron expression and handler. |
+| GET | /v1/schedule/{id} | Get a scheduled task by ID. |
+| PUT | /v1/schedule/{id} | Update a scheduled task's cron or handler. |
+| DELETE | /v1/schedule/{id} | Delete a scheduled task. |
+| GET | /v1/schedule/list | List all scheduled tasks. |
+| POST | /v1/schedule/pause/{id} | Pause a scheduled task. |
+| POST | /v1/schedule/resume/{id} | Resume a paused scheduled task. |
+
+### Agent Utilities
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/diff/compare | Compare two text or JSON inputs and return additions, deletions, and changes. |
+| POST | /v1/redact/process | Redact sensitive data (emails, phones, SSNs, IPs) from text with configurable masking. |
+| POST | /v1/rank/score | Score and rank items by weighted criteria. Returns sorted results with scores. |
+| POST | /v1/dedupe/match | Find duplicate records using fuzzy string matching and optional field-level comparison. |
+| POST | /v1/classify/classify | Classify text into categories using keyword/pattern matching with confidence scores. |
+| POST | /v1/trace/start | Start a new execution trace with metadata. |
+| POST | /v1/trace/span | Add a span to an existing trace. |
+| GET | /v1/trace/{traceId} | Get full trace with all spans by trace ID. |
+| POST | /v1/annotation/create | Create an annotation on content with type and metadata. |
+| GET | /v1/annotation/{id} | Get an annotation by ID. |
+| PUT | /v1/annotation/{id} | Update an annotation. |
+| DELETE | /v1/annotation/{id} | Delete an annotation. |
+| GET | /v1/annotation/list | List all annotations. |
+| POST | /v1/feedback/submit | Submit feedback (thumbs up/down, rating) for an entity. |
+| GET | /v1/feedback/aggregate/{entityId} | Get aggregated feedback for an entity. |
+| GET | /v1/feedback/list | List all feedback entries. |
+| POST | /v1/convert/transform | Convert between formats: JSON↔YAML, XML↔JSON, CSV↔JSON, markdown↔HTML. |
+| POST | /v1/summarize/extract | Extract summaries from long text. Returns key points, summary, and word counts. |
+| POST | /v1/form/validate | Validate form fields against schemas (email, phone, required, pattern, etc.). |
+| POST | /v1/form/generate | Generate form schemas from field definitions. |
+| POST | /v1/context/truncate | Truncate text to fit a token limit with optional sliding window. |
+| POST | /v1/context/count | Count tokens/chars in text for budget planning. |
+| POST | /v1/context/slice | Slice text with overlap for chunking long documents. |
+
+### Business Operations
+
+| Method | Path | Description |
+|--------|------|------------|
+| POST | /v1/invoice/create | Create an invoice with line items, due date, and client info. |
+| GET | /v1/invoice/{id} | Get an invoice by ID. |
+| GET | /v1/invoice/list | List invoices with pagination. |
+| POST | /v1/contract/create | Create a contract with parties, terms, and expiry date. |
+| GET | /v1/contract/{id} | Get a contract by ID. |
+| GET | /v1/contract/list | List contracts with pagination. |
+| POST | /v1/expense/create | Log an expense with category, amount, and receipt. |
+| GET | /v1/expense/{id} | Get an expense by ID. |
+| PUT | /v1/expense/{id} | Update expense details or status. |
+| DELETE | /v1/expense/{id} | Delete an expense. |
+| GET | /v1/expense/list | List expenses with pagination. |
+| GET | /v1/expense/summary | Get expense summary by category and date range. |
+| POST | /v1/subscription/create | Create a subscription with plan, interval, and price. |
+| GET | /v1/subscription/{id} | Get a subscription by ID. |
+| PUT | /v1/subscription/{id} | Update subscription plan or status. |
+| POST | /v1/subscription/cancel/{id} | Cancel a subscription. |
+| GET | /v1/subscription/list | List subscriptions with pagination. |
+| POST | /v1/ledger/entry | Create a double-entry journal transaction with debit/credit lines. |
+| GET | /v1/ledger/balance/{accountId} | Get account balance by account ID. |
+| GET | /v1/ledger/entries | List ledger entries with pagination. |
+| GET | /v1/ledger/trial-balance | Get trial balance across all accounts. |
+| POST | /v1/payroll/calculate | Calculate gross/net pay with deductions and hours. |
+| GET | /v1/payroll/{id} | Get a payroll run by ID. |
+| GET | /v1/payroll/list | List payroll runs with pagination. |
+| POST | /v1/coupon/create | Create a coupon with code, type (percentage/fixed), value, and limits. |
+| POST | /v1/coupon/validate | Validate a coupon code and calculate discount. |
+| GET | /v1/coupon/{id} | Get a coupon by ID. |
+| PUT | /v1/coupon/{id} | Update coupon details. |
+| DELETE | /v1/coupon/{id} | Delete a coupon. |
+| POST | /v1/cart/create | Create an empty cart. |
+| POST | /v1/cart/{id}/item | Add an item to a cart. |
+| PUT | /v1/cart/{id}/item/{itemId} | Update item quantity in a cart. |
+| DELETE | /v1/cart/{id}/item/{itemId} | Remove an item from a cart. |
+| GET | /v1/cart/{id} | Get a cart by ID with items and totals. |
+| POST | /v1/checkout/process | Process checkout: create invoice, record ledger entries, deduct inventory. |
+| POST | /v1/refund/request | Request a refund for an invoice with reason. |
+| PUT | /v1/refund/{id}/status | Update refund status (approved/rejected/completed). |
+| GET | /v1/refund/{id} | Get a refund by ID. |
+| GET | /v1/refund/list | List refunds with pagination. |
+| POST | /v1/inventory/item | Add an inventory item with SKU, quantity, and reorder point. |
+| PUT | /v1/inventory/{id}/stock | Adjust stock levels for an item. |
+| GET | /v1/inventory/{id} | Get an inventory item by ID. |
+| GET | /v1/inventory/list | List inventory items with pagination. |
+| POST | /v1/inventory/reserve | Reserve stock for an order. |
+| POST | /v1/inventory/release | Release previously reserved stock. |
+| POST | /v1/approval/request | Create an approval request with level, context, and deadline. |
+| POST | /v1/approval/{id}/approve | Approve a pending request. |
+| POST | /v1/approval/{id}/reject | Reject a pending request with reason. |
+| GET | /v1/approval/{id} | Get an approval request by ID. |
+| GET | /v1/approval/list | List approval requests with pagination. |
+
+## Common Use Cases
+
+### Currency Conversion
+```
+POST /v1/currency/convert
+{"from":"USD","to":"EUR","amount":100}
+```
+
+### Email Validation
+```
+POST /v1/email/validate
+{"email":"user@example.com"}
+```
+
+### IP Geolocation
+```
+POST /v1/ip/lookup
+{"ip":"8.8.8.8"}
+```
+
+### Web Extraction
+```
+POST /v1/extract/extract
+{"url":"https://example.com","selectors":{"title":"h1","price":".price"}}
+```
+
+### Sentiment Analysis
+```
+POST /v1/sentiment/analyze
+{"text":"I love this product! Best purchase ever."}
+```
+
+### PDF Merge
+```
+POST /v1/pdf/merge
+{"urls":["https://example.com/doc1.pdf","https://example.com/doc2.pdf"],"outputFilename":"merged.pdf"}
+```
+
+### Distributed Lock
+```
+POST /v1/lock/acquire
+{"resource":"order-4821","holder":"agent-1","ttlSeconds":30}
+```
+
+### Queue a Job
+```
+POST /v1/queue/enqueue
+{"queue":"email-notifications","data":{"to":"user@example.com","subject":"Welcome"}}
+```
+
+### Invoice Creation
+```
+POST /v1/invoice/create
+{"clientId":"usr_123","lineItems":[{"description":"API Pro Plan","quantity":1,"unitPrice":60}],"dueDate":"2026-05-13"}
+```
+
+### Text Redaction
+```
+POST /v1/redact/process
+{"text":"Contact John at john@example.com or 555-867-5309. SSN: 123-45-6789.","types":["email","phone","ssn"]}
+```
+
+## OpenAPI Spec
+
+Full machine-readable spec: https://agentapihive.com/api/openapi.json
+
+## MCP Server
+
+Install as a native tool for Claude and other MCP-compatible agents:
+
+    npm install @agentapihive/mcp-server
+
+Configure in your MCP client:
+
+    {
+      "mcpServers": {
+        "agent-api-hive": {
+          "command": "npx",
+          "args": ["-y", "@agentapihive/mcp-server"],
+          "env": { "AGENT_API_KEY": "YOUR_KEY" }
+        }
+      }
+    }
+
+## Links
+
+- Dashboard: https://agentapihive.com/dashboard
+- Documentation: https://agentapihive.com/docs
+- Pricing: https://agentapihive.com/pricing
+- OpenAPI Spec: https://agentapihive.com/api/openapi.json

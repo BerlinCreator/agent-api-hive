@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_model": "agent_api_hive",
+  "name_for_human": "Agent API Hive",
+  "description_for_model": "Access 76 APIs and 191 endpoints for AI agents — image processing, PDF tools, currency conversion, email validation, web scraping, sentiment analysis, OCR, distributed locks, queues, invoicing, and more. One API key, one base URL.",
+  "description_for_human": "76 APIs. One key. Built for AI agents and developers.",
+  "auth": {
+    "type": "service_http",
+    "authorization_type": "bearer"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://agentapihive.com/api/openapi.json"
+  },
+  "logo_url": "https://agentapihive.com/logo.png",
+  "contact_email": "hello@agentapihive.com",
+  "legal_info_url": "https://agentapihive.com/pricing"
+}

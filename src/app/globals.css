@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: hsl(150 2% 3%);
+  --color-foreground: hsl(0 0% 98%);
+  --color-card: hsl(150 3% 6%);
+  --color-card-foreground: hsl(0 0% 98%);
+  --color-primary: hsl(0 0% 90%);
+  --color-primary-foreground: hsl(150 2% 3%);
+  --color-secondary: hsl(150 3% 8%);
+  --color-secondary-foreground: hsl(0 0% 98%);
+  --color-muted: hsl(150 3% 8%);
+  --color-muted-foreground: hsl(0 0% 64%);
+  --color-accent: hsl(142 71% 45%);
+  --color-accent-foreground: hsl(150 2% 3%);
+  --color-border: hsl(150 3% 10%);
+  --color-input: hsl(150 3% 10%);
+  --color-ring: hsl(142 71% 45%);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, hsl(0 0% 98%), hsl(0 0% 98%), hsl(0 0% 64%));
+}
+
+.text-gradient-accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #34d399, #22c55e);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glow-accent {
+  box-shadow: 0 0 40px -10px rgba(34, 197, 94, 0.3);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(150 3% 10%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(150 3% 16%);
+}
+
+::selection {
+  background: rgba(34, 197, 94, 0.2);
+  color: white;
+}

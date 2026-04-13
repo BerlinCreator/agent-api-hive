@@ -1,0 +1,61 @@
+# Agent API Hive — robots.txt
+# We want AI agents and crawlers to discover our API docs and specs.
+
+User-agent: ClaudeBot
+Allow: /docs/
+Allow: /api/
+Allow: /agent
+Allow: /llms.txt
+Allow: /apis
+Allow: /pricing
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /(auth)/
+
+User-agent: GPTBot
+Allow: /docs/
+Allow: /api/
+Allow: /agent
+Allow: /llms.txt
+Allow: /apis
+Allow: /pricing
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /(auth)/
+
+User-agent: PerplexityBot
+Allow: /docs/
+Allow: /api/
+Allow: /agent
+Allow: /llms.txt
+Allow: /apis
+Allow: /pricing
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /(auth)/
+
+User-agent: anthropic-ai
+Allow: /docs/
+Allow: /api/
+Allow: /agent
+Allow: /llms.txt
+Allow: /apis
+Allow: /pricing
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /(auth)/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: *
+Allow: /docs/
+Allow: /api/
+Allow: /agent
+Allow: /llms.txt
+Allow: /apis
+Allow: /pricing
+Disallow: /dashboard
+Disallow: /auth/
+
+Sitemap: https://agentapihive.com/sitemap.xml
